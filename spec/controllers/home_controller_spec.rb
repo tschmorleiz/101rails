@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe HomeController do
 
-  describe "GET 'index'" do
-    it "should be successful" do
-      get 'index'
+  describe "opening landing page" do
+    it "doesn't make any error" do
+      get :index
       response.should be_success
     end
   end
