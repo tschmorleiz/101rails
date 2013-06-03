@@ -18,7 +18,7 @@ Wiki::Application.routes.draw do
   get '/wiki' => 'pages#show'
   get '/tours' => 'tours#index'
   get '/search' => 'pages#search'
-  match '/wiki/:title' => 'pages#show' , :constraints => { :id => /.*/ }
+  match '/wiki/:full_title' => 'pages#show' , :constraints => { :id => /.*/ }
   match '/tours/:title' => 'tours#show'
 
   #users
@@ -37,7 +37,7 @@ Wiki::Application.routes.draw do
         delete '/' => 'pages#delete'
         get 'sections' => 'pages#sections'
         get 'internal_links' => 'pages#internal_links'
-        get 'sections/:title' => 'pages#section'
+        get 'sections/:full_title' => 'pages#section'
         get 'summary' => 'pages#summary'
       end
     end
