@@ -4,7 +4,7 @@ describe HomeController do
 
   describe "opening landing page" do
     it "doesn't make any error" do
-      get :index
+      visit '/'
       response.should be_success
     end
   end

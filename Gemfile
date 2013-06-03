@@ -61,6 +61,7 @@ gem 'rails_admin', '0.4.8'
 
 # tests
 group :development, :test do
+  gem 'capybara'
   gem 'rspec-rails', '2.13.2'
 end
 
