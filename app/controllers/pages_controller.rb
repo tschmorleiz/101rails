@@ -4,9 +4,8 @@ class PagesController < ApplicationController
 
   respond_to :json, :html
 
-  before_filter :check_uri, :only => [:show, :page_to_resource, :get_rdf_graph, :get_rdf,
-                                      :get_json, :delete, :parse, :summary, :sections, :internal_link, :update_history,
-                                      :update, :rename, :section]
+  before_filter :check_uri
+
   def check_uri
 
     # get page title
@@ -130,7 +129,6 @@ class PagesController < ApplicationController
   def get_rdf
     title = params[:id]
     graph = self.get_rdf_graph(title)
-
     respond_with graph.dump(:ntriples)
   end
 
@@ -141,7 +139,9 @@ class PagesController < ApplicationController
     rdf.each do |resource|
       json.append ["#{resource.subject.scheme}://#{resource.subject.host}#{resource.subject.path}",
                     "#{resource.predicate.scheme}://#{resource.predicate.host}#{resource.predicate.path}",
-                    resource.object.kind_of?(RDF::Literal) ? resource.object.object : "#{resource.object.scheme}:/#{resource.object.host}#{resource.object.path}", ]
+                    resource.object.kind_of?(RDF::Literal) ?
+                        resource.object.object :
+                        "#{resource.object.scheme}:/#{resource.object.host}#{resource.object.path}", ]
     end
     respond_with json
   end
